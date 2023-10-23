@@ -46,7 +46,7 @@ const showSubMenu = () => {
         :type="typeOfChecked"
         @click="updateListArray"
       />
-      {{ list }}
+      <h4 class="tree-item-main__h4">{{ list }}</h4>
     </div>
     <Transition name="list-animation">
       <div v-if="colorsStore.lists[list].showSubTree" class="sub-tree">
@@ -57,10 +57,10 @@ const showSubMenu = () => {
           <TreeItem
             :id="item.id"
             :parent-name="list"
-            v-model:color="item.color"
-            v-model:count="item.count"
+            :color="item.color"
+            :count="item.count"
             :checked="item.checked"
-            :name="'item ' + (index + 1)"
+            :name="'Item ' + (index + 1)"
           />
         </div>
       </div>
@@ -70,9 +70,12 @@ const showSubMenu = () => {
 
 <style lang="scss">
 .tree-item-main {
-  // display: flex;
   margin-bottom: 1em;
   width: 100%;
+  &__h4 {
+    margin-left: 0.5em;
+    font-weight: 200;
+  }
   &__wrapper {
     display: flex;
     align-items: center;
@@ -86,6 +89,6 @@ const showSubMenu = () => {
   display: flex;
   flex-direction: column;
   width: 30%;
-  margin-left: 2em;
+  margin-left: 1em;
 }
 </style>

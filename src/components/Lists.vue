@@ -2,7 +2,7 @@
 import { useColors } from "../store/colors";
 import Button from "./UI/Button.vue";
 import BoxItem from "./UI/BoxItem.vue";
-import { computed, watch } from "vue";
+import { watch } from "vue";
 import { shuffle as _shuffle } from "lodash-es";
 import { ref } from "vue";
 
@@ -10,7 +10,6 @@ interface IListProps {
   list: string;
 }
 
-const index = ref(0);
 const props = defineProps<IListProps>();
 
 const colorsStore = useColors();
@@ -27,6 +26,15 @@ function deleteItem(id: number, list: string) {
 
 const boxD = ref([]);
 getItems();
+
+watch(
+  colorsStore.lists,
+  () => {
+    // persist the whole state to the local storage whenever it changes
+    getItems();
+  },
+  { deep: true }
+);
 
 function getItems() {
   boxD.value = [];
@@ -53,10 +61,20 @@ function getItems() {
 
 <template>
   <div class="list-item">
-    <div style="align-self: flex-end">
-      <Button @clickOnButton="toggleShuffleItems(list)" text="Перемешать" />
+    <div style="display: flex; justify-content: space-between">
+      <h3 style="font-weight: 100">{{ list }}</h3>
+      <div>
+        <Button
+          @clickOnButton="toggleShuffleItems(list)"
+          :text="
+            colorsStore.lists[props.list].shuffle
+              ? 'Упорядочнить'
+              : 'Перемешать'
+          "
+        />
+      </div>
     </div>
-    <p>{{ list }}</p>
+
     <div class="box-wrapper">
       <box-item
         :boxesData="boxD"

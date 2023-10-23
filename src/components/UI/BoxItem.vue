@@ -1,6 +1,5 @@
 <template>
-  {{ boxesData.length }}
-  <TransitionGroup name="fade" tag="div" class="container">
+  <TransitionGroup name="fade" tag="div">
     <template v-for="item in boxesData" :key="item.id">
       <div
         class="box-item"
@@ -23,10 +22,6 @@ defineEmits(["deleteItem"]);
 </script>
 
 <style lang="scss">
-.container {
-  // display: flex;
-  // flex-direction: column;
-}
 .box-item {
   width: 16px;
   height: 16px;

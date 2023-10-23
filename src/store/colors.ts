@@ -20,25 +20,25 @@ interface IColorState {
 export const useColors = defineStore("colors", {
   state: (): IColorState => ({
     lists: {
-      "list 1": {
+      "List 1": {
         shuffle: false,
         showSubTree: false,
         data: [
           {
             id: 1,
             count: 4,
-            color: "#00ff00",
+            color: "#00BCD4",
             checked: true,
           },
           {
             id: 2,
             count: 2,
-            color: "#00ff00",
+            color: "#6A1B9A",
             checked: true,
           },
         ],
       },
-      "list 2": {
+      "List 2": {
         shuffle: false,
         showSubTree: false,
         data: [
@@ -51,13 +51,13 @@ export const useColors = defineStore("colors", {
           {
             id: 4,
             count: 12,
-            color: "green",
+            color: "#D81B60",
             checked: false,
           },
           {
             id: 5,
             count: 3,
-            color: "#00ff00",
+            color: "#536DFE",
             checked: false,
           },
         ],
@@ -88,6 +88,26 @@ export const useColors = defineStore("colors", {
         }
         return i;
       });
+    },
+    updateColor(name: string, id: number, color: string) {
+      const updatedArr = this.lists[name].data.map((i: any) => {
+        if (i.id === id) {
+          i.color = color;
+          return i;
+        }
+        return i;
+      });
+      this.lists[name].data = updatedArr;
+    },
+    updateCount(name: string, id: number, count: string) {
+      const updatedArr = this.lists[name].data.map((i: any) => {
+        if (i.id === id) {
+          i.count = count;
+          return i;
+        }
+        return i;
+      });
+      this.lists[name].data = updatedArr;
     },
     deleteItem(index: number, name: string) {
       const deleteArr = this.lists[name].data.map((i: any) => {

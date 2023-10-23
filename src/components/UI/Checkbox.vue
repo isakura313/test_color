@@ -32,7 +32,7 @@ function toggleCheck(e: Event) {
 .check-box {
   border: 1px solid #263238;
   border-radius: 1px;
-  width: 20px;
+  width: 16px;
   height: 16px;
   display: flex;
   justify-content: center;

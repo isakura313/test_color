@@ -1,7 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
 import TreeItemMain from "./TreeItemMain.vue";
-
 import { useColors } from "../store/colors";
 
 const colorsStore = useColors();
@@ -43,7 +41,7 @@ function showSubMenu(name: string) {
 }
 
 .tree-items__wrapper {
-  width: 50%;
+  width: 80%;
 }
 .list-animation-enter-active {
   animation: list-animation-in 0.5s;

@@ -15,11 +15,20 @@ const colorsStore = useColors();
 const props = defineProps<ITreeItem>();
 const emits = defineEmits(["update:color", "update:count"]);
 
-const updateColor = (e: Event) => {
-  emits("update:color", (e.target as HTMLInputElement).value);
-};
 const updateCount = (e: Event) => {
-  emits("update:count", (e.target as HTMLInputElement).value);
+  console.log(props.parentName, props.id, (e.target as HTMLInputElement).value);
+  colorsStore.updateCount(
+    props.parentName,
+    props.id,
+    (e.target as HTMLInputElement).value
+  );
+};
+const updateColors = (e: Event) => {
+  colorsStore.updateColor(
+    props.parentName,
+    props.id,
+    (e.target as HTMLInputElement).value
+  );
 };
 
 const updateChecked = () => {
@@ -35,7 +44,7 @@ const updateChecked = () => {
         :model="checked"
         @update:modelValue="updateChecked"
       />
-      <p>{{ name }}</p>
+      <p class="tree-item__p">{{ name }}</p>
     </div>
     <div class="tree-item__edit">
       <input
@@ -48,7 +57,7 @@ const updateChecked = () => {
         type="color"
         :value="color"
         class="tree-item__edit_color_input"
-        @input="updateColor"
+        @input="updateColors"
       />
     </div>
   </div>
@@ -65,16 +74,19 @@ const updateChecked = () => {
   &__name {
     display: flex;
   }
+  &__p {
+    margin-left: 0.5em;
+  }
   &__edit {
     display: flex;
     align-items: center;
   }
   &__edit_text_input {
-    width: 40px;
+    width: 30px;
   }
   &__edit_color_input {
-    width: 20px;
-    border: none;
+    width: 30px;
+    border-color: transparent;
     outline: none;
   }
 }
