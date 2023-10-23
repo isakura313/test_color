@@ -1,19 +1,40 @@
 <script lang="ts" setup>
 import CheckBox from "../components/UI/CheckBox.vue";
-interface ITreeItem {
-  name: string;
-  color: string;
-  count: number;
-}
-defineEmits(["update:color", "update:count"]);
+import { useColors } from "../store/colors";
 
+interface ITreeItem {
+  id: number;
+  parentName: string;
+  name: string;
+  readonly color: string;
+  readonly count: number;
+  checked: boolean;
+}
+
+const colorsStore = useColors();
 const props = defineProps<ITreeItem>();
+const emits = defineEmits(["update:color", "update:count"]);
+
+const updateColor = (e: Event) => {
+  emits("update:color", (e.target as HTMLInputElement).value);
+};
+const updateCount = (e: Event) => {
+  emits("update:count", (e.target as HTMLInputElement).value);
+};
+
+const updateChecked = () => {
+  colorsStore.updateChecked(props.id, props.parentName);
+};
 </script>
 
 <template>
   <div class="tree-item">
     <div class="tree-item__name">
-      <CheckBox />
+      <CheckBox
+        type="Check"
+        :model="checked"
+        @update:modelValue="updateChecked"
+      />
       <p>{{ name }}</p>
     </div>
     <div class="tree-item__edit">
@@ -21,13 +42,13 @@ const props = defineProps<ITreeItem>();
         type="text"
         :value="count"
         class="tree-item__edit_text_input"
-        @input="$emit('update:count', Number($event.target.value))"
+        @input="updateCount"
       />
       <input
         type="color"
         :value="color"
         class="tree-item__edit_color_input"
-        @input="$emit('update:color', $event.target.value)"
+        @input="updateColor"
       />
     </div>
   </div>
@@ -40,6 +61,7 @@ const props = defineProps<ITreeItem>();
   justify-content: space-between;
   width: 70%;
   margin-left: 20%;
+
   &__name {
     display: flex;
   }
@@ -51,7 +73,7 @@ const props = defineProps<ITreeItem>();
     width: 40px;
   }
   &__edit_color_input {
-    width: 40px;
+    width: 20px;
     border: none;
     outline: none;
   }

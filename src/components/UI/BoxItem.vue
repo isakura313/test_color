@@ -1,7 +1,7 @@
 <template>
   <template v-if="!shuffle">
     <div
-      v-for="i in [...Array(count).keys()]"
+      v-for=" in [...Array(count).keys()]"
       class="box-item"
       :style="{ backgroundColor: backgroundColor }"
       @click="$emit('deleteItem')"
@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-
 interface IColor {
   backgroundColor: string;
   count: number;
@@ -34,5 +33,8 @@ defineEmits(["deleteItem"]);
   width: 16px;
   height: 16px;
   margin-left: 4px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 </style>

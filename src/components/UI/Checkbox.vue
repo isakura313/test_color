@@ -1,24 +1,46 @@
 <template>
-  <input type="checkbox" v-model="model" :value="value" />
-  <span>{{ label }}</span>
+  <template v-if="type === 'Check'">
+    <div class="check-box" @click="toggleCheck">
+      <CheckIcon v-if="model" />
+    </div>
+  </template>
+  <template v-else>
+    <div class="check-box">
+      <div class="black_box"></div>
+    </div>
+  </template>
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits } from "vue";
-const props = defineProps({
-  modelValue: { type: [Array, Boolean] },
-  value: { type: [Boolean, Object] },
-  label: { type: String },
-});
-const emit = defineEmits(["update:modelValue"]);
+import { defineEmits } from "vue";
+import CheckIcon from "../icons/CheckIcon.vue";
 
+interface ICheckBoxProps {
+  model: boolean;
+  type: "Check" | "Box";
+}
+defineProps<ICheckBoxProps>();
 
-const model = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(value) {
-    emit("update:modelValue", value);
-  },
-});
+const emits = defineEmits(["update:modelValue"]);
+
+function toggleCheck(e: Event) {
+  emits("update:modelValue", (e.target as HTMLInputElement).value);
+}
 </script>
+
+<style lang="scss">
+.check-box {
+  border: 1px solid #263238;
+  border-radius: 1px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.black_box {
+  background-color: black;
+  width: 8px;
+  height: 8px;
+}
+</style>

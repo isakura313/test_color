@@ -2,12 +2,10 @@
 import { useColors } from "../store/colors";
 import Button from "./UI/Button.vue";
 import BoxItem from "./UI/BoxItem.vue";
-import { shuffle } from "lodash";
 import { computed } from "vue";
 
 interface IListProps {
   list: string;
-  box: any;
 }
 
 const props = defineProps<IListProps>();
@@ -15,33 +13,31 @@ const props = defineProps<IListProps>();
 const colorsStore = useColors();
 
 function toggleShuffleItems(name: string) {
-  // imitate random
   colorsStore.shuffleItems(name);
 }
 
 const shuffleData = computed(() => {
-  const allArray = [];
+  const allArray: Array<string> = [];
   colorsStore.lists[props.list].data.forEach((item) => {
     console.log(item);
     for (let i = 0; i < item.count; i++) {
       allArray.push(item.color);
     }
   });
-  let shuffled = allArray
+  const shuffled = allArray
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
-  return shuffle(shuffled);
+  return shuffled;
 });
 
-// function deleteItem(box.id, list){
-
-// }
+function deleteItem(id: number, list: string) {
+  colorsStore.deleteItem(id, list);
+}
 </script>
 
 <template>
   <div class="list-item">
-    {{ colorsStore.lists[list].shuffle }}
     <div style="align-self: flex-end">
       <Button @clickOnButton="toggleShuffleItems(list)" text="Перемешать" />
     </div>
