@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
     "sass": "^1.69.4",
     "vue": "^3.3.4"
