@@ -10,6 +10,7 @@ interface IColorState {
   lists: {
     [key: string]: {
       shuffle: boolean;
+      showSubTree: boolean;
       data: IItem[];
     };
   };
@@ -20,21 +21,23 @@ export const useColors = defineStore("colors", {
     lists: {
       "list 1": {
         shuffle: false,
+        showSubTree: false,
         data: [
           {
             id: 1,
             count: 4,
-            color: "red",
+            color: "#00ff00",
           },
           {
             id: 2,
             count: 2,
-            color: "blue",
+            color: "#00ff00",
           },
         ],
       },
       "list 2": {
         shuffle: false,
+        showSubTree: false,
         data: [
           {
             id: 3,
@@ -85,6 +88,9 @@ export const useColors = defineStore("colors", {
     },
     shuffleItems(name: string) {
       this.lists[name].shuffle = !this.lists[name].shuffle;
+    },
+    showSubTree(name: string) {
+      this.lists[name].showSubTree = !this.lists[name].showSubTree;
     },
   },
 });
