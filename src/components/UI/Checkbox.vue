@@ -6,7 +6,7 @@
   </template>
   <template v-else>
     <div class="check-box">
-      <div class="black_box"></div>
+      <div class="black_box" v-if="model"></div>
     </div>
   </template>
 </template>
@@ -32,7 +32,7 @@ function toggleCheck(e: Event) {
 .check-box {
   border: 1px solid #263238;
   border-radius: 1px;
-  width: 16px;
+  width: 20px;
   height: 16px;
   display: flex;
   justify-content: center;

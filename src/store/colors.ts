@@ -28,13 +28,13 @@ export const useColors = defineStore("colors", {
             id: 1,
             count: 4,
             color: "#00ff00",
-            checked: false,
+            checked: true,
           },
           {
             id: 2,
             count: 2,
             color: "#00ff00",
-            checked: false,
+            checked: true,
           },
         ],
       },
@@ -107,6 +107,7 @@ export const useColors = defineStore("colors", {
       this.lists[name].showSubTree = !this.lists[name].showSubTree;
     },
     toggleCheckboxes(name: string, flag: boolean) {
+      console.log(name, flag);
       this.lists[name].data = this.lists[name].data.map((i: IItem): IItem => {
         i.checked = flag;
         return i;

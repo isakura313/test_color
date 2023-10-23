@@ -59,7 +59,7 @@ const updateChecked = () => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 70%;
+  width: 100%;
   margin-left: 20%;
 
   &__name {
