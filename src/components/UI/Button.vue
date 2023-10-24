@@ -1,17 +1,16 @@
+<script setup lang="ts">
+interface IButtonProps {
+  text: string
+}
+defineProps<IButtonProps>()
+const props = defineEmits(["clickOnButton"])
+</script>
+
 <template>
   <button class="ui-button" @click="$emit('clickOnButton')">
     {{ text }}
   </button>
-  <div class="ui-button-group"></div>
 </template>
-
-<script setup lang="ts">
-interface IButtonProps {
-  text: string;
-}
-defineProps<IButtonProps>();
-const props = defineEmits(["clickOnButton"]);
-</script>
 
 <style lang="scss">
 .ui-button {

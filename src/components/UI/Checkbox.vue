@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { defineEmits } from "vue"
+import CheckIcon from "../icons/CheckIcon.vue"
+
+interface ICheckBoxProps {
+  model: boolean
+  type: "Check" | "Box"
+}
+defineProps<ICheckBoxProps>()
+
+const emits = defineEmits(["update:modelValue"])
+
+function toggleCheck(e: Event) {
+  emits("update:modelValue", (e.target as HTMLInputElement).value)
+}
+</script>
+
 <template>
   <template v-if="type === 'Check'">
     <div class="check-box" @click="toggleCheck">
@@ -10,23 +27,6 @@
     </div>
   </template>
 </template>
-
-<script setup lang="ts">
-import { defineEmits } from "vue";
-import CheckIcon from "../icons/CheckIcon.vue";
-
-interface ICheckBoxProps {
-  model: boolean;
-  type: "Check" | "Box";
-}
-defineProps<ICheckBoxProps>();
-
-const emits = defineEmits(["update:modelValue"]);
-
-function toggleCheck(e: Event) {
-  emits("update:modelValue", (e.target as HTMLInputElement).value);
-}
-</script>
 
 <style lang="scss">
 .check-box {

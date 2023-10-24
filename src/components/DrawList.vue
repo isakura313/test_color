@@ -23,18 +23,4 @@ const colorsStore = useColors();
   display: flex;
   flex-direction: column;
 }
-
-.list-item {
-  border: 2px solid #263238;
-  margin-top: 1em;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-}
-
-.box-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 4px;
-}
 </style>

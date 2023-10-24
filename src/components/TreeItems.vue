@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import TreeItemMain from "./TreeItemMain.vue";
-import { useColors } from "../store/colors";
+import TreeItemMain from "./TreeItemMain.vue"
+import { useColors } from "../store/colors"
 
-const colorsStore = useColors();
+const colorsStore = useColors()
 
 function showSubMenu(name: string) {
-  colorsStore.showSubTree(name);
+  colorsStore.showSubTree(name)
 }
 </script>
 
@@ -26,22 +26,11 @@ function showSubMenu(name: string) {
   display: flex;
   flex-direction: column;
 }
-.tree-items-main {
-  width: 100%;
-}
-
 .list-menu {
   display: flex;
   align-items: center;
   cursor: pointer;
   width: 100%;
-}
-.rotateElement {
-  transform: rotate(90deg);
-}
-
-.tree-items__wrapper {
-  width: 80%;
 }
 .list-animation-enter-active {
   animation: list-animation-in 0.5s;

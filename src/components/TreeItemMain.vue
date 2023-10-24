@@ -1,37 +1,37 @@
 <script lang="ts" setup>
-import { computed } from "vue";
-import CheckBox from "../components/UI/CheckBox.vue";
-import ChevronDownIcon from "../components/icons/ChevronDownIcon.vue";
-import TreeItem from "../components/TreeItem.vue";
+import { computed } from "vue"
+import CheckBox from "../components/UI/CheckBox.vue"
+import ChevronDownIcon from "../components/icons/ChevronDownIcon.vue"
+import TreeItem from "../components/TreeItem.vue"
 
-import { useColors } from "../store/colors";
+import { useColors } from "../store/colors"
 
-const colorsStore = useColors();
+const colorsStore = useColors()
 
 interface ITreeMainProps {
-  list: string;
+  list: string
 }
-const $emits = defineEmits(["showSubMenu"]);
-const props = defineProps<ITreeMainProps>();
+const $emits = defineEmits(["showSubMenu"])
+const props = defineProps<ITreeMainProps>()
 
 const check = computed(() => {
   return colorsStore.lists[props.list].data.some((i) => i.checked === true)
     ? true
-    : false;
-});
+    : false
+})
 
 function updateListArray() {
-  colorsStore.toggleCheckboxes(props.list, !check.value);
+  colorsStore.toggleCheckboxes(props.list, !check.value)
 }
 const typeOfChecked = computed(() => {
   return colorsStore.lists[props.list].data.every((i) => i.checked === true)
     ? "Check"
-    : "Box";
-});
+    : "Box"
+})
 
 const showSubMenu = () => {
-  $emits("showSubMenu", props.list);
-};
+  $emits("showSubMenu", props.list)
+}
 </script>
 
 <template>
@@ -72,6 +72,9 @@ const showSubMenu = () => {
 .tree-item-main {
   margin-bottom: 1em;
   width: 100%;
+  &__wrapper {
+    width: 80%;
+  }
   &__h4 {
     margin-left: 0.5em;
     font-weight: 200;

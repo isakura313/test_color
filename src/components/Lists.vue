@@ -1,60 +1,67 @@
 <script lang="ts" setup>
-import { useColors } from "../store/colors";
-import Button from "./UI/Button.vue";
-import BoxItem from "./UI/BoxItem.vue";
-import { watch } from "vue";
-import { shuffle as _shuffle } from "lodash-es";
-import { ref } from "vue";
+import { useColors } from "../store/colors"
+import Button from "./UI/Button.vue"
+import BoxItem from "./UI/BoxItem.vue"
+import { ref, onMounted, watch } from "vue"
+import type { Ref } from "vue"
 
 interface IListProps {
-  list: string;
+  list: string
 }
 
-const props = defineProps<IListProps>();
+interface IListElement {
+  id: number
+  color?: string
+  parentId?: number
+  break?: boolean
+}
 
-const colorsStore = useColors();
+const props = defineProps<IListProps>()
+
+const colorsStore = useColors()
 
 function toggleShuffleItems(name: string) {
-  colorsStore.shuffleItems(name);
-  getItems();
+  colorsStore.shuffleItems(name)
+  getItems()
 }
 
-function deleteItem(id: number, list: string) {
-  alert(id);
-  colorsStore.deleteItem(id, list);
+function deleteItem(id: number) {
+  colorsStore.deleteItem(id, props.list)
 }
 
-const boxD = ref([]);
-getItems();
+const boxD: Ref<IListElement[]> = ref([])
+
+onMounted(() => {
+  getItems()
+})
 
 watch(
   colorsStore.lists,
   () => {
-    // persist the whole state to the local storage whenever it changes
-    getItems();
+    getItems()
   },
-  { deep: true }
-);
+  { deep: true },
+)
 
 function getItems() {
-  boxD.value = [];
-  let counter = 0;
+  boxD.value = []
+  let counter = 0
   colorsStore.lists[props.list].data.forEach((item) => {
     for (let i = 0; i < item.count; i++) {
-      boxD.value.push({ id: counter, color: item.color, parentId: item.id });
-      counter++;
+      boxD.value.push({ id: counter, color: item.color, parentId: item.id })
+      counter = counter + 1
     }
     if (!colorsStore.lists[props.list].shuffle) {
-      boxD.value.push({ id: counter, break: true });
+      boxD.value.push({ id: counter, break: true })
     }
-  });
+  })
   if (colorsStore.lists[props.list].shuffle) {
     boxD.value = boxD.value
       .map((value) => ({ value, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
-      .map(({ value }) => value);
+      .map(({ value }) => value)
   } else {
-    return boxD.value;
+    return boxD.value
   }
 }
 </script>
@@ -76,7 +83,7 @@ function getItems() {
     </div>
 
     <div class="box-wrapper">
-      <box-item
+      <Box-item
         :boxesData="boxD"
         @delete-item="deleteItem"
         :shuffle="colorsStore.lists[props.list].shuffle"
@@ -84,3 +91,19 @@ function getItems() {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.list-item {
+  border: 2px solid #263238;
+  margin-top: 1em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.box-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+</style>
