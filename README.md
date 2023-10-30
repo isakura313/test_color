@@ -1,18 +1,31 @@
-# Vue 3 + TypeScript + Vite
+Тестовая задача
+ 
+Левая панель имеет список Lists с вложенными списками неких items. У каждого item есть параметры "количество"" и "цвет", которые можно менять вручную. Item помечается как выбранный с помощью чекбокса.
+ 
+Все выбранные items отображаются на правой панели в отдельном блоке для каждого List в указанном количестве в виде цветных квадратиков.
+ 
+Каждый отдельный блок List имеет два состояния: отсортированное и перемешанное в случайном порядке.
+ 
+Входные данные: 5 листов от 4 до 10 вложенных элементов (произвольно)
+Макеты для примера смотри на второй странице.
+ 
+Требования
+При клике на чекбокс уровня List должны выбираться все вложенные items. Если все вложенные items уже выбраны, то снимать с них выделение. Если выбран хотя бы один item, но не все, то отображать точку в чекбоксе родительского List'a.
+Должна быть возможность изменять параметр "количество" у items (обычного <input> достаточно, значение должно быть >= 0);
+Должна быть возможность изменять параметр "цвет" у items (<input type="color">);
+Сортировка и перемешивание List'ов по отдельности;
+Все действия на странице должны происходить без её перезагрузки;
+Все изменяемые значения должны быть реактивными;
+У каждого item изначально должны быть указаны параметры "количество"" и "цвет" по умолчанию (задать произвольно).
+ 
+Дополнительно
+Lists в левой панели должны сворачиваться и разворачиваться;
+При клике на квадратик в правой панели он должен удаляться (уменьшаться параметр "количество" у соответствующего item).
+Требования по коду
+Задание выполнить с использованием vue.js (vuex, pinia если необходимо), можно использовать css препроцессоры;
+Код должен быть написан понятно и аккуратно, с соблюдением табуляции и прочих элементов написания, без лишних элементов и функций, не имеющих отношения к функционалу тестового задания;
+Читабельность и наличие элементарной архитектуры;
+Верстка должна быть выполнена без использования UI библиотек.
+<img width="604" alt="image" src="https://github.com/isakura313/test_color/assets/18578858/10014d87-997d-4a35-a1fa-11dc85474c4d">
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support For `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
